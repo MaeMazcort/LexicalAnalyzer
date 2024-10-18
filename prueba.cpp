@@ -1,16 +1,20 @@
 #include <iostream>
 using namespace std;
 
-int suma(int a, int b) {
-    return a + b;
+string esPar(int a) {
+    if(a % 2 == 0) {
+        return "Es par";
+    } else {
+        return "Es impar";
+    }
 }
 
 int main() {
-    int a, b;
+    int a;
 
-    cin >> a >> b;
+    cin >> a;
 
-    cout << "La suma es " << suma(a, b) << endl;
+    cout << esPar(a) << endl;
     
     return 0;
 }

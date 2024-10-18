@@ -11,8 +11,11 @@ TOKENS = {
     'NAMESPACE': r'\bnamespace\b',
     'STD': r'\bstd\b',
     'INT': r'\bint\b',
+    'STRING': r'\bstring\b',  # Added string keyword
     'RETURN': r'\breturn\b',
-    'MAIN': r'\bmain\b',  # Treat main as a keyword
+    'IF': r'\bif\b',          # Added if keyword
+    'ELSE': r'\belse\b',       # Added else keyword
+    'MAIN': r'\bmain\b',       # Treat main as a keyword
     
     # Identifiers (cin, cout, endl included as part of identifiers)
     'ID': r'\b[a-zA-Z_]\w*\b',  # Identifier pattern
@@ -28,6 +31,7 @@ TOKENS = {
     'GREATEREQUAL': r'>=',   # Must be checked before '>'
     'NOTEQUAL': r'!=',       # Must be checked before '='
     'EQUAL': r'==',          # Must be checked before '='
+    'MODULO': r'%',          # Added modulo operator
     'LESSTHAN': r'<',
     'GREATERTHAN': r'>',
     'ASSIGN': r'=',
@@ -92,7 +96,7 @@ def simulate_dfa(tokens):
     rows = []
     for token_type, token_value in tokens:
         # Based on the token type, classify the component lexically and provide attributes
-        if token_type in ['INCLUDE', 'USING', 'NAMESPACE', 'STD', 'INT', 'RETURN', 'MAIN']:
+        if token_type in ['INCLUDE', 'USING', 'NAMESPACE', 'STD', 'INT', 'STRING', 'RETURN', 'IF', 'ELSE', 'MAIN']:
             rows.append([token_value, token_type.lower(), '-'])
         elif token_type == 'ID':
             rows.append([token_value, 'id', 'apuntador a la entrada en la tabla'])
@@ -102,7 +106,7 @@ def simulate_dfa(tokens):
             rows.append([token_value, 'float', 'apuntador a la entrada en la tabla'])
         elif token_type == 'STRING_LITERAL':
             rows.append([token_value, 'string_literal', '-'])
-        elif token_type in ['PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'EQUAL', 'ASSIGN', 'NOTEQUAL', 'LESSTHAN', 'LESSEQUAL', 'GREATERTHAN', 'GREATEREQUAL', 'STREAM_OUT_OP', 'STREAM_IN_OP']:
+        elif token_type in ['PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'EQUAL', 'ASSIGN', 'NOTEQUAL', 'LESSTHAN', 'LESSEQUAL', 'GREATERTHAN', 'GREATEREQUAL', 'STREAM_OUT_OP', 'STREAM_IN_OP', 'MODULO']:
             rows.append([token_value, 'oprel', token_type])
         elif token_type in ['LPAREN', 'RPAREN', 'LBRACE', 'RBRACE', 'SEMICOLON', 'COMMA']:
             rows.append([token_value, 'delimiter', token_type])

@@ -4,21 +4,32 @@ using,using,-
 namespace,namespace,-
 std,std,-
 ;,delimiter,SEMICOLON
-int,int,-
-suma,id,apuntador a la entrada en la tabla
+string,string,-
+esPar,id,apuntador a la entrada en la tabla
 (,delimiter,LPAREN
 int,int,-
 a,id,apuntador a la entrada en la tabla
-",",delimiter,COMMA
-int,int,-
-b,id,apuntador a la entrada en la tabla
+),delimiter,RPAREN
+{,delimiter,LBRACE
+if,if,-
+(,delimiter,LPAREN
+a,id,apuntador a la entrada en la tabla
+%,oprel,MODULO
+2,num,apuntador a la entrada en la tabla
+==,oprel,EQUAL
+0,num,apuntador a la entrada en la tabla
 ),delimiter,RPAREN
 {,delimiter,LBRACE
 return,return,-
-a,id,apuntador a la entrada en la tabla
-+,oprel,PLUS
-b,id,apuntador a la entrada en la tabla
+"""Es par""",string_literal,-
 ;,delimiter,SEMICOLON
+},delimiter,RBRACE
+else,else,-
+{,delimiter,LBRACE
+return,return,-
+"""Es impar""",string_literal,-
+;,delimiter,SEMICOLON
+},delimiter,RBRACE
 },delimiter,RBRACE
 int,int,-
 main,main,-
@@ -27,24 +38,16 @@ main,main,-
 {,delimiter,LBRACE
 int,int,-
 a,id,apuntador a la entrada en la tabla
-",",delimiter,COMMA
-b,id,apuntador a la entrada en la tabla
 ;,delimiter,SEMICOLON
 cin,id,apuntador a la entrada en la tabla
 >>,oprel,STREAM_IN_OP
 a,id,apuntador a la entrada en la tabla
->>,oprel,STREAM_IN_OP
-b,id,apuntador a la entrada en la tabla
 ;,delimiter,SEMICOLON
 cout,id,apuntador a la entrada en la tabla
 <<,oprel,STREAM_OUT_OP
-"""La suma es """,string_literal,-
-<<,oprel,STREAM_OUT_OP
-suma,id,apuntador a la entrada en la tabla
+esPar,id,apuntador a la entrada en la tabla
 (,delimiter,LPAREN
 a,id,apuntador a la entrada en la tabla
-",",delimiter,COMMA
-b,id,apuntador a la entrada en la tabla
 ),delimiter,RPAREN
 <<,oprel,STREAM_OUT_OP
 endl,id,apuntador a la entrada en la tabla
