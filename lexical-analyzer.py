@@ -3,15 +3,31 @@ import pandas as pd
 
 # Define a set of regular expressions for tokenizing
 TOKENS = {
+    # Preprocessor directives
+    'INCLUDE': r'#include\s*<\w+>',  # Matches #include <...>
+    
+    # Keywords
+    'USING': r'\busing\b',
+    'NAMESPACE': r'\bnamespace\b',
+    'STD': r'\bstd\b',
+    'INT': r'\bint\b',
+    'RETURN': r'\breturn\b',
+    'MAIN': r'\bmain\b',  # Treat main as a keyword
+    
+    # Identifiers (cin, cout, endl included as part of identifiers)
+    'ID': r'\b[a-zA-Z_]\w*\b',  # Identifier pattern
+
     # Numbers
     'FLOAT': r'\d+\.\d+',  # Floating-point number pattern
     'NUMBER': r'\d+',  # Integer pattern
     
     # Operators (Order matters: prioritize compound operators first)
-    'LESSEQUAL': r'<=',  # Must be checked before '<'
-    'GREATEREQUAL': r'>=',  # Must be checked before '>'
-    'NOTEQUAL': r'!=',  # Must be checked before '='
-    'EQUAL': r'==',  # Must be checked before '='
+    'STREAM_OUT_OP': r'<<',  # Matches C++ stream output operator <<
+    'STREAM_IN_OP': r'>>',   # Matches C++ stream input operator >>
+    'LESSEQUAL': r'<=',      # Must be checked before '<'
+    'GREATEREQUAL': r'>=',   # Must be checked before '>'
+    'NOTEQUAL': r'!=',       # Must be checked before '='
+    'EQUAL': r'==',          # Must be checked before '='
     'LESSTHAN': r'<',
     'GREATERTHAN': r'>',
     'ASSIGN': r'=',
@@ -26,15 +42,10 @@ TOKENS = {
     'LBRACE': r'\{',
     'RBRACE': r'\}',
     'SEMICOLON': r';',
+    'COMMA': r',',
     
-    # Keywords
-    'IF': r'\bif\b',
-    'ELSE': r'\belse\b',
-    'WHILE': r'\bwhile\b',
-    'RETURN': r'\breturn\b',
-    
-    # Identifiers
-    'ID': r'\b[a-zA-Z_]\w*\b',  # Identifier pattern
+    # String literals
+    'STRING_LITERAL': r'"[^"]*"',  # Matches anything inside double quotes
 }
 
 # Tokenizer function with comment handling and correct order of operators
@@ -46,9 +57,14 @@ def tokenize(code):
         if not code:  # If code is empty after stripping whitespace, break the loop
             break
 
-        # Ignore single-line comments starting with '#'
-        if code.startswith('#'):
+        # Ignore single-line comments starting with '//'
+        if code.startswith('//'):
             code = code.split('\n', 1)[-1]
+            continue
+
+        # Ignore multi-line comments (/* ... */)
+        if code.startswith('/*'):
+            code = code.split('*/', 1)[-1]
             continue
 
         match = None
@@ -76,7 +92,7 @@ def simulate_dfa(tokens):
     rows = []
     for token_type, token_value in tokens:
         # Based on the token type, classify the component lexically and provide attributes
-        if token_type in ['IF', 'THEN', 'ELSE', 'WHILE', 'RETURN']:
+        if token_type in ['INCLUDE', 'USING', 'NAMESPACE', 'STD', 'INT', 'RETURN', 'MAIN']:
             rows.append([token_value, token_type.lower(), '-'])
         elif token_type == 'ID':
             rows.append([token_value, 'id', 'apuntador a la entrada en la tabla'])
@@ -84,9 +100,11 @@ def simulate_dfa(tokens):
             rows.append([token_value, 'num', 'apuntador a la entrada en la tabla'])
         elif token_type == 'FLOAT':
             rows.append([token_value, 'float', 'apuntador a la entrada en la tabla'])
-        elif token_type in ['PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'EQUAL', 'ASSIGN', 'NOTEQUAL', 'LESSTHAN', 'LESSEQUAL', 'GREATERTHAN', 'GREATEREQUAL']:
+        elif token_type == 'STRING_LITERAL':
+            rows.append([token_value, 'string_literal', '-'])
+        elif token_type in ['PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'EQUAL', 'ASSIGN', 'NOTEQUAL', 'LESSTHAN', 'LESSEQUAL', 'GREATERTHAN', 'GREATEREQUAL', 'STREAM_OUT_OP', 'STREAM_IN_OP']:
             rows.append([token_value, 'oprel', token_type])
-        elif token_type in ['LPAREN', 'RPAREN', 'LBRACE', 'RBRACE', 'SEMICOLON']:
+        elif token_type in ['LPAREN', 'RPAREN', 'LBRACE', 'RBRACE', 'SEMICOLON', 'COMMA']:
             rows.append([token_value, 'delimiter', token_type])
 
     # Create a DataFrame to simulate the table

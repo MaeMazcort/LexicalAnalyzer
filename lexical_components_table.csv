@@ -1,31 +1,55 @@
 Expresión Regular,Componente Léxico,Valor del Atributo
-if,if,-
+#include <iostream>,include,-
+using,using,-
+namespace,namespace,-
+std,std,-
+;,delimiter,SEMICOLON
+int,int,-
+suma,id,apuntador a la entrada en la tabla
 (,delimiter,LPAREN
+int,int,-
 a,id,apuntador a la entrada en la tabla
-<=,oprel,LESSEQUAL
-10,num,apuntador a la entrada en la tabla
+",",delimiter,COMMA
+int,int,-
+b,id,apuntador a la entrada en la tabla
 ),delimiter,RPAREN
 {,delimiter,LBRACE
 return,return,-
 a,id,apuntador a la entrada en la tabla
 +,oprel,PLUS
-5,num,apuntador a la entrada en la tabla
+b,id,apuntador a la entrada en la tabla
 ;,delimiter,SEMICOLON
 },delimiter,RBRACE
-else,else,-
-{,delimiter,LBRACE
-while,while,-
+int,int,-
+main,main,-
 (,delimiter,LPAREN
-b,id,apuntador a la entrada en la tabla
-!=,oprel,NOTEQUAL
-20,num,apuntador a la entrada en la tabla
 ),delimiter,RPAREN
 {,delimiter,LBRACE
+int,int,-
+a,id,apuntador a la entrada en la tabla
+",",delimiter,COMMA
 b,id,apuntador a la entrada en la tabla
-=,oprel,ASSIGN
-b,id,apuntador a la entrada en la tabla
--,oprel,MINUS
-1,num,apuntador a la entrada en la tabla
 ;,delimiter,SEMICOLON
-},delimiter,RBRACE
+cin,id,apuntador a la entrada en la tabla
+>>,oprel,STREAM_IN_OP
+a,id,apuntador a la entrada en la tabla
+>>,oprel,STREAM_IN_OP
+b,id,apuntador a la entrada en la tabla
+;,delimiter,SEMICOLON
+cout,id,apuntador a la entrada en la tabla
+<<,oprel,STREAM_OUT_OP
+"""La suma es """,string_literal,-
+<<,oprel,STREAM_OUT_OP
+suma,id,apuntador a la entrada en la tabla
+(,delimiter,LPAREN
+a,id,apuntador a la entrada en la tabla
+",",delimiter,COMMA
+b,id,apuntador a la entrada en la tabla
+),delimiter,RPAREN
+<<,oprel,STREAM_OUT_OP
+endl,id,apuntador a la entrada en la tabla
+;,delimiter,SEMICOLON
+return,return,-
+0,num,apuntador a la entrada en la tabla
+;,delimiter,SEMICOLON
 },delimiter,RBRACE
