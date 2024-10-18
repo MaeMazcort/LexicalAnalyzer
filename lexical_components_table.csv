@@ -1,0 +1,31 @@
+Expresión Regular,Componente Léxico,Valor del Atributo
+if,if,-
+(,delimiter,LPAREN
+a,id,apuntador a la entrada en la tabla
+<=,oprel,LESSEQUAL
+10,num,apuntador a la entrada en la tabla
+),delimiter,RPAREN
+{,delimiter,LBRACE
+return,return,-
+a,id,apuntador a la entrada en la tabla
++,oprel,PLUS
+5,num,apuntador a la entrada en la tabla
+;,delimiter,SEMICOLON
+},delimiter,RBRACE
+else,else,-
+{,delimiter,LBRACE
+while,while,-
+(,delimiter,LPAREN
+b,id,apuntador a la entrada en la tabla
+!=,oprel,NOTEQUAL
+20,num,apuntador a la entrada en la tabla
+),delimiter,RPAREN
+{,delimiter,LBRACE
+b,id,apuntador a la entrada en la tabla
+=,oprel,ASSIGN
+b,id,apuntador a la entrada en la tabla
+-,oprel,MINUS
+1,num,apuntador a la entrada en la tabla
+;,delimiter,SEMICOLON
+},delimiter,RBRACE
+},delimiter,RBRACE

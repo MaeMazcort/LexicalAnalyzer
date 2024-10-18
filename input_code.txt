@@ -1,0 +1,7 @@
+if (a <= 10) {
+    return a + 5;
+} else {
+    while (b != 20) {
+        b = b - 1;
+    }
+}
